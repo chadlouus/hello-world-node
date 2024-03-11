@@ -14,6 +14,14 @@ app.get('/', function (req, res) {
   res.send('Hello world from Node\n')
 })
 
+app.get('/ip', (req, res) => {
+  var ip = req.headers['x-forwarded-for'] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    (req.connection.socket ? req.connection.socket.remoteAddress : null);
+  res.send(ip + "\n");
+})
+
 app.get('/today', function (req, res) {
   var today = new Date()
 
